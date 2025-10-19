@@ -3,8 +3,14 @@ services:
     build: .
     ports:
       - "${PORT:-4000}:4000"
-    env_file:
-      - .env
+    environment:
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_SERVICE_KEY: ${SUPABASE_SERVICE_KEY}
+      SUPABASE_STORAGE_BUCKET: ${SUPABASE_STORAGE_BUCKET:-pdfs}
+      MAX_INPUT_MB: ${MAX_INPUT_MB:-600}
+      MAX_OUTPUT_MB: ${MAX_OUTPUT_MB:-95}
+      GHOSTSCRIPT_PRESET: ${GHOSTSCRIPT_PRESET:-/printer}
+      TMP_DIR: ${TMP_DIR:-/tmp/pdf-compressor}
     volumes:
       - ./tmp:/tmp/pdf-compressor
     restart: unless-stopped
