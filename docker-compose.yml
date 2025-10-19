@@ -1,0 +1,10 @@
+services:
+  pdf-compressor:
+    build: .
+    ports:
+      - "${PORT:-4000}:4000"
+    env_file:
+      - .env
+    volumes:
+      - ./tmp:/tmp/pdf-compressor
+    restart: unless-stopped
